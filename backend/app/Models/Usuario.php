@@ -6,8 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Usuario extends Model
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -17,32 +18,49 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $table = 'Usuario'; 
+
+    protected $primaryKey = 'id_usuario';
+    
+    public $incrementing = true;
+
+    protected $keyType = 'int';
+
+    public $timestamps = true; 
+
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nombre', 
+        'ap_paterno', 
+        'ap_materno', 
+        'fecha_nacimiento', 
+        'sexo', 
+        'telefono', 
+        'correo', 
+        'rfc', 
+        'curp', 
+        'salario', 
+        'status', 
+        'ultimo_login', 
+        'intentos_fallidos', 
+        'fecha_entrada', 
+        'contrasena', 
+        'num_ext', 
+        'num_int', 
+        'calle', 
+        'colonia', 
+        'municipio', 
+        'estado', 
+        'id_rol'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'created_at',
+        'updated_at',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function rol()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Rol::class, 'id_rol', 'id_rol');
     }
+
 }

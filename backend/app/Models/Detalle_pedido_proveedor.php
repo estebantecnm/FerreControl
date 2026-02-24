@@ -19,7 +19,7 @@ class Detalle_pedido_proveedor extends Model
     protected $fillable = [
         'cantidad',
         'precio_compra',
-        'id_pedido_proveedor',
+        'id_pedido',
         'id_producto',
     ];
 
@@ -27,4 +27,14 @@ class Detalle_pedido_proveedor extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function pedidoProveedor()
+    {
+        return $this->belongsTo(Pedido_proveedor::class, 'id_pedido', 'id_pedido');
+    }
+
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'id_producto', 'id_producto');
+    }
 }

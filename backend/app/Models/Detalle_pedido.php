@@ -8,7 +8,7 @@ class Detalle_pedido extends Model
 {
     protected $table = 'Detalle_pedido';
 
-    protected $primaryKey = 'id_detalle_pedido';
+    protected $primaryKey = 'id_detalle';
 
     public $incrementing = true;
 
@@ -17,14 +17,24 @@ class Detalle_pedido extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'id_pedido',
+        'cantidad', 
+        'precio_unitario', 
+        'id_pedido_cliente', 
         'id_producto',
-        'cantidad',
-        'precio_unitario',
-    ];
+        ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
     ];
+
+    public function pedidoCliente()
+    {
+        return $this->belongsTo(Pedido_cliente::class, 'id_pedido_cliente', 'id_pedido_cliente');
+    }
+
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'id_producto', 'id_producto');
+    }
 }

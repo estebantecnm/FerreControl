@@ -15,24 +15,28 @@ class Cliente extends Model
 
     protected $keyType = 'int';
 
-    protected $timestamps = true;
+    public $timestamps = true;
 
     protected $fillable = [
-        'nombre',
-        'ap_paterno',
-        'ap_materno',
-        'rfc',
-        'correo',
-        'telefono',
+        'nombre', 
+        'ap_paterno', 
+        'ap_materno', 
+        'fecha_nacimiento', 
+        'sexo', 
+        'correo', 
+        'rfc', 
+        'telefono', 
+        'num_ext', 
+        'num_int', 
+        'calle', 
+        'colonia', 
+        'municipio', 
         'estado',
-        'municipio',
-        'ciudad',
-        'colonia',
-        'calle',
-        'num_ext',
-        'num_int',
-        'fecha_nacimiento',
-        'sexo',
+        'status',
+        'limite_credito',
+        'saldo_pendiente',
+        'dias_credito',
+        'tipo_cliente',
     ];
 
     protected $hidden = [
@@ -44,6 +48,24 @@ class Cliente extends Model
     //Relaciones que tiene con otras tablas
     public function pedidos()
     {
-        return $this->hasMany(Pedido::class);
+        return $this->hasMany(Pedido_cliente::class, 'id_cliente', 'id_cliente');
     }
+
+    public function ventas()
+    {
+        return $this->hasMany(Venta::class, 'id_cliente', 'id_cliente');
+    }
+
+    //funcion para consultar historial de compras del cliente(para eso accede a la tabla ventas y de ahi a los detalles de venta)
+    public function consultarHistorialCompras()
+    {
+        return $this->ventas()->with('Detalle_venta')->get();
+    }
+
+    //funcion para gestionar el saldo pendiente del cliente, se actualiza cada vez que se realiza una venta o un pago
+    public function gestionarSaldoPendiente($id)
+    {
+        return $this->where('id_cliente', $id)->first()->saldo_pendiente;
+    }
+
 }

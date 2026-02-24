@@ -17,13 +17,19 @@ class Especificacion extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'nombre_atributo', 
+        'valor', 
         'id_producto',
-        'descripcion',
-        'valor',
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
     ];
+
+    // Relación con Producto
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'id_producto', 'id_producto');
+    }
 }
