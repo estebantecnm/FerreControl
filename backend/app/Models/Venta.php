@@ -25,6 +25,7 @@ class Venta extends Model
         'pago_cliente', 
         'cambio',
         'id_cliente',
+        'id_pedido_cliente',
     ];
 
     protected $hidden = [
@@ -47,6 +48,11 @@ class Venta extends Model
     public function cliente()
     {
         return $this->belongsTo(Cliente::class, 'id_cliente', 'id_cliente');
+    }
+
+    public function pedidoCliente()
+    {
+        return $this->belongsTo(Pedido_cliente::class, 'id_pedido_cliente', 'id_pedido_cliente');
     }
 
     public function detalles() {

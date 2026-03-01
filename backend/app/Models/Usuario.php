@@ -2,22 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Model
+use Laravel\Sanctum\HasApiTokens; 
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class Usuario extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $table = 'Usuario'; 
 
     protected $primaryKey = 'id_usuario';
@@ -57,6 +52,12 @@ class Usuario extends Model
         'created_at',
         'updated_at',
     ];
+
+    // Se llama 'contrasena', decirle a Laravel dónde buscar:
+    public function getAuthPassword()
+    {
+        return $this->contrasena;
+    }
 
     public function rol()
     {

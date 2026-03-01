@@ -23,9 +23,14 @@ return new class extends Migration
             $table->string('unidad_medida', 25);
             $table->integer('cantidad_presentacion');
             $table->string('color', 20);
+            $table->integer('cantidad_inicial')->nullable();
             
             $table->unsignedInteger('id_categoria');
             $table->foreign('id_categoria')->references('id_categoria')->on('Categoria');
+
+            //relacion con usuario
+            $table->unsignedInteger('id_usuario');
+            $table->foreign('id_usuario')->references('id_usuario')->on('Usuario');
 
             $table->timestamps(); // Esto crea created_at y updated_at
         });

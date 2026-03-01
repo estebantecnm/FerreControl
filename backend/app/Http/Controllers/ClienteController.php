@@ -43,6 +43,13 @@ class ClienteController extends Controller
             'colonia' => 'required|string|max:30',
             'municipio' => 'required|string|max:30',
             'estado' => 'required|string|max:30',
+            //status del cliente, activo o inactivo
+            'status' => 'required|string|max:9|in:Activo,Inactivo',
+            'limite_credito' => 'required|numeric|min:0',
+            'saldo_pendiente' => 'required|numeric|min:0',
+            'dias_credito' => 'required|integer|min:0',
+            'tipo_cliente' => 'required|string|max:25|in:Fisica,Moral', // Fisica o Moral
+
         ]);
 
         if ($validator->fails()) {
@@ -94,6 +101,12 @@ class ClienteController extends Controller
             'colonia' => 'sometimes|string|max:30',
             'municipio' => 'sometimes|string|max:30',
             'estado' => 'sometimes|string|max:30',
+            'status' => 'sometimes|string|max:9|in:Activo,Inactivo',
+            'limite_credito' => 'sometimes|numeric|min:0',
+            'saldo_pendiente' => 'sometimes|numeric|min:0',
+            'dias_credito' => 'sometimes|integer|min:0',
+            'tipo_cliente' => 'sometimes|string|max:25|in:Fisica,Moral',
+            
         ]);
 
         if ($validator->fails()) {

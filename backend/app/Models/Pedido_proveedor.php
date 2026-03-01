@@ -40,4 +40,9 @@ class Pedido_proveedor extends Model
     {
         return $this->belongsTo(Usuario::class, 'id_usuario', 'id_usuario');
     }
+
+    public function detalles()
+    {
+        return $this->hasMany(Detalle_pedido_proveedor::class, 'id_pedido', 'id_pedido');
+    }
 }

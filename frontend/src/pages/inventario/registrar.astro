@@ -1,0 +1,41 @@
+---
+import '../../styles/global.css';
+import RegistroProducto from '../../components/vue/RegistroProducto.vue';
+---
+
+<nav class="p-4 bg-gray-200 flex gap-4">
+  <a href="/dashboard" class="font-semibold">Dashboard</a>
+  <a href="/inventario/lista">Inventario</a>
+  <a href="/inventario/registrar">Nuevo producto</a>
+  <a href="/ventas/pos">Punto de Venta</a>
+  <button onclick="logout()" class="text-red-600">Salir</button>
+</nav>
+
+<div class="p-4">
+  <RegistroProducto client:load />
+</div>
+
+<script type="module">
+  async function logout() {
+    const token = localStorage.getItem('token');
+    try {
+      if (token) {
+        await fetch('http://127.0.0.1:8000/api/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          }
+        });
+      }
+    } catch (e) {
+      console.error('Error al cerrar sesión:', e);
+    } finally {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '/';
+    }
+  }
+  // Exponer para onclick inline
+  window.logout = logout;
+</script>

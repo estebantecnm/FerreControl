@@ -21,6 +21,11 @@ return new class extends Migration
             
             $table->unsignedInteger('id_cliente');
             $table->foreign('id_cliente')->references('id_cliente')->on('Cliente');
+
+            //de qué pedido nació cada venta para tener trazabilidad
+            $table->unsignedInteger('id_pedido_cliente');
+            $table->foreign('id_pedido_cliente')->references('id_pedido_cliente')->on('Pedido_cliente');
+
             $table->timestamps(); // Esto crea created_at y updated_at
         });
     }

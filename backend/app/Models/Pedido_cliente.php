@@ -53,5 +53,14 @@ class Pedido_cliente extends Model
         return $this->belongsTo(Cliente::class, 'id_cliente', 'id_cliente');
     }
 
+    public function venta()
+    {
+        return $this->hasOne(Venta::class, 'id_pedido_cliente', 'id_pedido_cliente');
+    }
+
+    public function detalles()
+    {
+        return $this->hasMany(Detalle_pedido::class, 'id_pedido_cliente', 'id_pedido_cliente');
+    }
 
 }

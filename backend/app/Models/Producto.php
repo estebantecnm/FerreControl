@@ -25,14 +25,39 @@ class Producto extends Model {
         'unidad_medida', 
         'cantidad_presentacion', 
         'color', 
-        'id_categoria'
+        'cantidad_inicial',
+        'id_categoria',
+        'id_usuario',
     ];
 
+    // Agregamos el atributo 'stock' a los atributos que se incluirán en la respuesta JSON
+    // Esto permite que al convertir el modelo a JSON, se incluya el stock calculado
+    // El método getStockAttribute se define más abajo para calcular el stock dinámicamente
+    // Esto es útil para mostrar el stock actual sin necesidad de almacenarlo en la base de datos
+    protected $appends = ['stock'];
+
+
+    public function getStockAttribute()
+    {
+        // Suma cantidades de entradas y resta cantidades de salidas
+        $entradas = $this->movimientos()->where('tipo_movimiento', 'Entrada')->sum('cantidad');
+        $salidas = $this->movimientos()->where('tipo_movimiento', 'Salida')->sum('cantidad');
+        
+        return $entradas - $salidas;
+    }
+
     public function categoria() {
-        return $this->belongsTo(Categoria::class, 'id_categoria', 'id_categoria');
+        return $this->belongsTo(Categoria::class, 'id_categoria');
+    }
+
+    public function usuario() {
+        return $this->belongsTo(Usuario::class, 'id_usuario');
     }
 
     public function especificaciones() {
-        return $this->hasMany(Especificacion::class, 'id_producto', 'id_producto');
+        return $this->hasMany(Especificacion::class, 'id_producto');
+    }
+    public function movimientos(){
+        return $this->hasMany(Movimiento_stock::class, 'id_producto');
     }
 }

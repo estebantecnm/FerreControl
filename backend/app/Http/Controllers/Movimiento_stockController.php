@@ -46,7 +46,7 @@ class Movimiento_stockController extends Controller
         $movimiento = Movimiento_stock::findOrFail($id);
         
         $validated = $request->validate([
-            'tipo_movimiento' => 'sometimes|string|max:30',
+            'tipo_movimiento' => 'sometimes|string|max:30 |in:Entrada,Salida,Ajuste',
             'cantidad' => 'sometimes|integer|min:1',
             'stock_anterior' => 'nullable|integer',
             'stock_nuevo' => 'nullable|integer',
