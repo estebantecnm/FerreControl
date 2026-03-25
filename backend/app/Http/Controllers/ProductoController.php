@@ -83,36 +83,45 @@ class ProductoController extends Controller
             : response()->json(['message' => 'Producto no encontrado'], 404);
     }
 
-    public function update(Request $request, $id)
-    {
-        $producto = Producto::find($id);
+   public function update(Request $request, $id)
+{
+    $producto = Producto::find($id);
 
-        if (!$producto) {
-            return response()->json(['message' => 'Producto no encontrado'], 404);
-        }
-
-        $validator = Validator::make($request->all(), [
-            'nombre' => 'sometimes|required|string', 
-            'marca' => 'sometimes|required|string|max:25',
-            'precio_venta' => 'sometimes|required|numeric',
-            'precio_compra' => 'sometimes|required|numeric',
-            'utilidad' => 'sometimes|required|numeric',
-            'codigo_barras' => 'sometimes|required|string',
-            'status' => 'sometimes|required|string|max:20',
-            'unidad_medida' => 'sometimes|required|string|max:25',
-            'cantidad_presentacion' => 'sometimes|required|integer',
-            'color' => 'sometimes|string|max:20',
-            'id_categoria' => 'sometimes|required|exists:Categoria,id_categoria',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
-        $producto->update($request->all());
-
-        return response()->json($producto);
+    if (!$producto) {
+        return response()->json(['message' => 'Producto no encontrado'], 404);
     }
+
+    $validator = Validator::make($request->all(), [
+        'nombre' => 'sometimes|required|string|max:50', 
+        'marca' => 'sometimes|required|string|max:25',
+        'precio_venta' => 'sometimes|required|numeric',
+        'precio_compra' => 'sometimes|required|numeric',
+        'utilidad' => 'sometimes|required|numeric',
+        // REGLA CRÍTICA: unique:Tabla,Columna,ID_a_ignorar,Nombre_Columna_ID
+        'codigo_barras' => 'sometimes|required|numeric|unique:Producto,codigo_barras,' . $id . ',id_producto',
+        'status' => 'sometimes|required|string|max:20',
+        'unidad_medida' => 'sometimes|required|string|max:25',
+        'cantidad_presentacion' => 'sometimes|required|integer',
+        'color' => 'sometimes|nullable|string|max:20', 
+        'id_categoria' => 'sometimes|required|exists:Categoria,id_categoria',
+        'id_usuario' => 'nullable|exists:Usuario,id_usuario'
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+    }
+
+    $data = $request->all();
+    
+    // Aseguramos el id_usuario para que PostgreSQL no proteste
+    if (!isset($data['id_usuario'])) {
+        $data['id_usuario'] = $producto->id_usuario ?? 1;
+    }
+
+    $producto->update($data);
+
+    return response()->json($producto);
+}
 
     public function destroy($id)
     {

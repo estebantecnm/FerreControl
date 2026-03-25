@@ -1,0 +1,13 @@
+---
+export const prerender = false;
+import ActualizarProducto from '../../../components/vue/ActualizarProducto.vue';
+import '../../../styles/global.css';
+
+
+const { id } = Astro.params;
+---
+
+<div style="background-color: #f8fafc; min-height: 100vh; padding: 2rem; color: black;">
+    <ActualizarProducto idProducto={id} client:only="vue" />
+</div>
+

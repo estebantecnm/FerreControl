@@ -18,6 +18,7 @@
             <th class="px-6 py-4 text-left text-xs uppercase tracking-wider text-slate-400 font-bold">Marca</th>
             <th class="px-6 py-4 text-right text-xs uppercase tracking-wider text-slate-400 font-bold">Precio</th>
             <th class="px-6 py-4 text-center text-xs uppercase tracking-wider text-slate-400 font-bold">Stock</th>
+            <th class="px-6 py-4 text-center text-xs uppercase tracking-wider text-slate-400 font-bold">Gestión</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-100 bg-white">
@@ -29,23 +30,21 @@
                 {{ prod.marca }}
               </span>
             </td>
-            <td class="px-6 py-5 text-slate-900 font-bold">${{ prod.precio_venta }}</td>
-            <td class="px-6 py-5 text-right">
-              <div class="flex justify-end items-center gap-2">
-                <span v-if="prod.stock <= 0" 
-                      class="bg-red-50 text-red-600 border border-red-100 px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-tighter">
-                  Sin Stock
-                </span>
-                <span v-else-if="prod.stock <= 5" 
-                      class="bg-orange-50 text-orange-600 border border-orange-100 px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-tighter">
-                  Por Agotarse
-                </span>
-                <span v-else 
-                      class="bg-emerald-50 text-emerald-600 border border-emerald-100 px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-tighter">
-                  Disponible
-                </span>
-                <span class="text-slate-400 font-mono text-xs">({{ prod.stock }})</span>
+            <td class="px-6 py-5 text-slate-900 font-bold text-right">${{ prod.precio_venta }}</td>
+            <td class="px-6 py-5">
+              <div class="flex justify-center items-center gap-2">
+                <span v-if="prod.cantidad_inicial <= 0" class="bg-red-50 text-red-600 border border-red-100 px-3 py-1 rounded-md text-[10px] font-black">Sin Stock</span>
+                <span v-else-if="prod.cantidad_inicial <= 5" class="bg-orange-50 text-orange-600 border border-orange-100 px-3 py-1 rounded-md text-[10px] font-black">Poco Stock</span>
+                <span v-else class="bg-emerald-50 text-emerald-600 border border-emerald-100 px-3 py-1 rounded-md text-[10px] font-black">Disponible</span>
+                <span class="text-slate-400 font-mono text-xs">({{ prod.cantidad_inicial }})</span>
               </div>
+            </td>
+            <td class="px-6 py-5 text-center">
+              <a :href="`/inventario/actualizar/${prod.id_producto}`" 
+                 class="btn !text-[10px] !py-1 !px-3 font-black uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all"
+                 style="text-decoration: none;">
+                Editar
+              </a>
             </td>
           </tr>
         </tbody>
@@ -53,6 +52,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { ref, onMounted } from 'vue';
 import { apiFetch } from '../../utils/api';
@@ -67,13 +67,12 @@ const load = async () => {
   try {
     const res = await apiFetch('/productos');
     if (!res.ok) {
-      error.value = 'Error al conectar con la base de datos';
+      error.value = `Error ${res.status}: No se encontraron productos`;
       return;
     }
-    // Asegúrate de que los campos coincidan con tu tabla: id_producto, nombre, marca, precio_venta, stock
     products.value = await res.json();
   } catch (err) {
-    error.value = 'El servidor no responde';
+    error.value = 'El servidor no responde. Revisa si el backend está encendido.';
   } finally {
     loading.value = false;
   }

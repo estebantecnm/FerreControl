@@ -7,12 +7,14 @@ import '../../styles/global.css';
 import POS from '../../components/vue/POS.vue';
 ---
 
-<nav class="p-4 bg-gray-200 flex gap-4">
-	<a href="/dashboard" class="font-semibold">Dashboard</a>
-	<a href="/inventario/lista">Inventario</a>
-	<a href="/inventario/registrar">Nuevo producto</a>
-	<a href="/ventas/pos">Punto de Venta</a>
-	<button onclick="logout()" class="text-red-600">Salir</button>
+<nav class="p-4 bg-white flex items-center justify-between border-b mb-6">
+    <div class="flex gap-4">
+        <a href="/dashboard" class="hover:text-blue-600 transition">Dashboard</a>
+        <a href="/inventario/lista" class="font-bold border-b-2 border-slate-900">Inventario</a>
+        <a href="/productos/registrar" class="hover:text-blue-600 transition">Nuevo producto</a>
+        <a href="/ventas/pos" class="hover:text-blue-600 transition">Punto de Venta</a>
+    </div>
+    <button onclick="logout()" class="text-red-600 border-red-600 hover:bg-red-50 px-4 py-1">Salir</button>
 </nav>
 
 <div class="p-4">
