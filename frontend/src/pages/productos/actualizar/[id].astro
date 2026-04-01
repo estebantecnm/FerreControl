@@ -1,0 +1,12 @@
+---
+export const prerender = false;
+import ActualizarProducto from '../../../components/vue/ActualizarProducto.vue';
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+const { id } = Astro.params;
+---
+
+<MainLayout title="Inventario de Productos" >
+    <ActualizarProducto idProducto={id} client:only="vue" />
+</MainLayout>
+

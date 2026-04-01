@@ -13,10 +13,9 @@ use App\Models\Usuario;
 
 class ProductoController extends Controller
 {
-    public function index()
-    {
-        //Solo se muestra el producto, sin relaciones para optimizar la consulta
-        $productos = Producto::all();
+    public function index() {
+        // Cargamos la relación del último movimiento para que el atributo 'stock' se llene
+        $productos = Producto::with('ultimoMovimiento')->get();
 
         return $productos->isEmpty() 
             ? response()->json(['message' => 'No se encontraron productos'], 404) 

@@ -1,0 +1,15 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import RegistroCliente from '../../components/vue/RegistroCliente.vue';
+---
+
+<MainLayout title="Registrar Nuevo Cliente">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-6">
+            <h1 class="text-3xl font-extrabold text-slate-800">Nuevo Cliente</h1>
+            <p class="text-slate-500">Completa la ficha de registro para el catálogo de clientes.</p>
+        </header>
+        
+        <RegistroCliente client:load />
+    </div>
+</MainLayout>

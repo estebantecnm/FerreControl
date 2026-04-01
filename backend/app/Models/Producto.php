@@ -36,14 +36,15 @@ class Producto extends Model {
     // Esto es útil para mostrar el stock actual sin necesidad de almacenarlo en la base de datos
     protected $appends = ['stock'];
 
+    // RELACIÓN CLAVE: Define cuál es el último movimiento registrado
+    public function ultimoMovimiento() {
+        return $this->hasOne(Movimiento_stock::class, 'id_producto')->latest('id_movimiento');
+    }
 
-    public function getStockAttribute()
-    {
-        // Suma cantidades de entradas y resta cantidades de salidas
-        $entradas = $this->movimientos()->where('tipo_movimiento', 'Entrada')->sum('cantidad');
-        $salidas = $this->movimientos()->where('tipo_movimiento', 'Salida')->sum('cantidad');
-        
-        return $entradas - $salidas;
+    public function getStockAttribute() {
+        // En lugar de sumar y restar toda la tabla, tomamos el 'stock_nuevo' 
+        // del movimiento más reciente. Esto es instantáneo.
+        return $this->ultimoMovimiento?->stock_nuevo ?? 0;
     }
 
     public function categoria() {
@@ -57,7 +58,8 @@ class Producto extends Model {
     public function especificaciones() {
         return $this->hasMany(Especificacion::class, 'id_producto');
     }
-    public function movimientos(){
+    public function movimientos() {
         return $this->hasMany(Movimiento_stock::class, 'id_producto');
     }
+    
 }

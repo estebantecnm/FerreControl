@@ -157,4 +157,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Procesar la entrada de mercancía (cambiado el estado del pedido_proveedor a Entregado y sube el stock)
     Route::put('/pedidos-proveedor/{id}/recibir', [Pedido_proveedorController::class, 'recibir']);
 
+
+    // APi para imprimir ticket de venta
+    Route::get('/ventas/{id}/ticket', [VentaController::class, 'generarTicket']);
 });

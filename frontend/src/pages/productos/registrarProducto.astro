@@ -1,17 +1,11 @@
 ---
-import '../styles/global.css';
-import ReportsDashboard from '../components/vue/ReportsDashboard.vue';
-import Header from '../components/astro/Header.astro';
+import RegistroProducto from '../../components/vue/RegistroProducto.vue';
+import MainLayout from '../../layouts/MainLayout.astro';
 ---
 
-<Header />
-<main class="p-6">
-    <h1>Bienvenido al Sistema</h1>
-</main> 
-
-<div class="bg-slate-50 min-h-screen p-8">
-  <ReportsDashboard client:load />
-</div>
+<MainLayout title="Inventario de Productos">
+    <RegistroProducto client:load />
+</MainLayout>
 
 <script type="module">
   async function logout() {
@@ -34,5 +28,6 @@ import Header from '../components/astro/Header.astro';
       window.location.href = '/';
     }
   }
+  // Exponer para onclick inline
   window.logout = logout;
 </script>

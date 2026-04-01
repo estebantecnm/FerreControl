@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Detalle_venta;
 use App\Models\Pedido_cliente;
 use App\Models\Movimiento_stock;
-
+use App\Models\Producto;
+use resources\views\tickets;
 
 class VentaController extends Controller
 {
@@ -65,18 +66,17 @@ class VentaController extends Controller
 
             // 2. Procesar Detalles y Movimientos
             foreach ($pedido->detalles as $item) {
-                // CALCULAMOS EL STOCK ACTUAL basado en el historial de movimientos
-                // Sumamos Entradas - Salidas de la tabla Movimiento_stock
-                $stockAnterior = Movimiento_stock::where('id_producto', $item->id_producto)
-                    ->selectRaw("SUM(CASE WHEN tipo_movimiento = 'Entrada' THEN cantidad ELSE -cantidad END) as total")
-                    ->value('total') ?? 0;
+                // Buscamos el producto con su último movimiento para saber el stock real
+                $producto = Producto::with('ultimoMovimiento')->findOrFail($item->id_producto);
+                $stockAnterior = $producto->stock; // Esto usa el atributo que definimos arriba
 
                 // Validar si hay suficiente
                 if ($stockAnterior < $item->cantidad) {
-                    throw new \Exception("Stock insuficiente. Disponible: {$stockAnterior}, Requerido: {$item->cantidad}");
+                    throw new \Exception("Stock insuficiente para {$producto->nombre}. Disponible: {$stockAnterior}, Requerido: {$item->cantidad}");
                 }
 
                 $stockNuevo = $stockAnterior - $item->cantidad;
+
 
                 // A. Crear detalle de venta
                 Detalle_venta::create([
@@ -150,5 +150,13 @@ class VentaController extends Controller
         $venta->delete();
 
         return response()->json(['message' => 'Venta eliminada correctamente']);
+    }
+
+    public function generarTicket($id)
+    {
+        $venta = Venta::with(['detalles.producto', 'cliente'])
+                    ->findOrFail($id);
+
+        return view('tickets.venta', compact('venta'));
     }
 }

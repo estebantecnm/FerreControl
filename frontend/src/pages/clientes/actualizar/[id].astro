@@ -1,0 +1,13 @@
+---
+export const prerender = false;
+import ActualizarCliente from '../../../components/vue/ActualizarCliente.vue';
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+const { id } = Astro.params;
+---
+
+<MainLayout title="Actualizar Cliente">
+    <div class="max-w-4xl mx-auto">
+        <ActualizarCliente idCliente={id} client:only="vue" />
+    </div>
+</MainLayout>

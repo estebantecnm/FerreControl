@@ -9,17 +9,27 @@ use App\Http\Controllers\Controller;
 
 class EspecificacionController extends Controller
 {
-    public function index()
+    public function index(Request $request) // Añadimos el Request
     {
-        $especificaciones = Especificacion::all();
+        // Verificamos si enviaron un id_producto en la URL (?id_producto=X)
+        $id_producto = $request->query('id_producto');
+
+        if ($id_producto) {
+            // Buscamos solo las que pertenecen a ese producto
+            $especificaciones = Especificacion::where('id_producto', $id_producto)->get();
+        } else {
+            // Comportamiento original: devolver todas
+            $especificaciones = Especificacion::all();
+        }
 
         if ($especificaciones->isEmpty()) {
-            return response()->json(['message' => 'No se encontraron especificaciones'], 404);
+            // Es mejor devolver un array vacío [] con 200 en lugar de 404
+            // para que el frontend no lo detecte como "error de servidor"
+            return response()->json([], 200);
         }
 
         return response()->json($especificaciones);
     }
-
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [

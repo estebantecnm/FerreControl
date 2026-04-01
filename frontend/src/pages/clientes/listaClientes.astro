@@ -1,0 +1,8 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import ClientesList from '../../components/vue/ClientesList.vue';
+---
+
+<MainLayout title="Lista de Clientes">
+    <ClientesList client:load />
+</MainLayout>

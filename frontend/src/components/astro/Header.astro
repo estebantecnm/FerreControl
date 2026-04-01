@@ -1,0 +1,68 @@
+---
+// src/components/astro/Header.astro
+---
+
+<nav class="p-4 bg-white border-b mb-6 shadow-sm">
+    <div class="container mx-auto flex items-center justify-between">
+        <div class="flex flex-wrap gap-4 items-center">
+            <a href="/dashboard" class="font-bold text-blue-800">FerreControl</a>
+                        <a href="/ventas/pos" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Punto de Venta</a>
+            <a href="/inventario/lista" class="hover:text-blue-600 transition">Inventario</a>
+
+            <div id="adminMenu" class="hidden flex items-center gap-4">
+                <div class="h-4 w-px bg-gray-300"></div> 
+                <a href="/productos/listaProductos" class="hover:text-blue-600 transition">Productos</a>
+                <a href="/clientes/listaClientes" class="hover:text-blue-600 transition">Clientes</a>
+                <a href="/productos/registrarCategoria" class="hover:text-blue-600 transition">Categorias</a>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <span id="userName" class="text-sm text-gray-600 italic"></span>
+            <button id="logoutBtn" class="text-red-600 border border-red-600 hover:bg-red-50 px-4 py-1 rounded transition">
+                Salir
+            </button>
+        </div>
+    </div>
+</nav>
+
+<script>
+    function inicializarHeader() {
+        const userJson = localStorage.getItem('user');
+        const adminMenu = document.getElementById('adminMenu');
+        const nameSpan = document.getElementById('userName');
+
+        if (userJson) {
+            const user = JSON.parse(userJson);
+            
+            // Log de control para confirmar que ahora sí lee 'rol'
+            console.log("Estructura detectada:", user);
+
+            if (nameSpan) nameSpan.innerText = user.nombre;
+
+            // CAMBIO AQUÍ: Usamos user.rol en lugar de user.id_rol
+            const userRol = Number(user.rol); 
+
+            if (userRol === 1) {
+                console.log("¡Confirmado: Es Admin!");
+                if (adminMenu) {
+                    adminMenu.classList.remove('hidden');
+                    adminMenu.classList.add('flex');
+                }
+            } else {
+                console.log("Es Vendedor (Rol: " + userRol + ")");
+                if (adminMenu) {
+                    adminMenu.classList.add('hidden');
+                    adminMenu.classList.remove('flex');
+                }
+            }
+        }
+    }
+
+    inicializarHeader();
+
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+        localStorage.clear();
+        window.location.href = '/';
+    });
+</script>

@@ -1,13 +1,14 @@
 ---
 export const prerender = false;
-import ActualizarProducto from '../../../components/vue/ActualizarProducto.vue';
-import '../../../styles/global.css';
-
+// Cambiamos el componente importado
+import RestockProducto from '../../../components/vue/inventario/RestockProducto.vue';
+import MainLayout from '../../../layouts/MainLayout.astro';
 
 const { id } = Astro.params;
 ---
 
-<div style="background-color: #f8fafc; min-height: 100vh; padding: 2rem; color: black;">
-    <ActualizarProducto idProducto={id} client:only="vue" />
-</div>
-
+<MainLayout title="Entrada de Inventario">
+    <div class="py-12 bg-slate-50 min-h-[calc(100vh-64px)]">
+        <RestockProducto idProducto={id} client:only="vue" />
+    </div>
+</MainLayout>
