@@ -1,26 +1,25 @@
 <template>
   <div class="space-y-6">
     <!-- Buscador -->
-    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-      <div class="relative">
+<div class="bg-white p-4 rounded-2xl shadow-sm">      <div class="relative">
         <input 
           v-model="search" 
           type="text" 
-          placeholder="Buscar por nombre, marca o modelo..." 
+          placeholder=" 🔍 Buscar por nombre, marca o modelo..." 
           class="w-full pl-12 pr-4 py-3 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
         />
       </div>
     </div>
 
     <!-- Tabla principal de productos -->
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-      <table class="w-full text-left">
+<div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <table class="w-full text-left">
         <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 text-[10px] uppercase font-black tracking-widest">
           <tr>
             <th class="p-5">Producto</th>
             <th class="p-5">Precio Venta</th>
             <th class="p-5">Stock Actual</th>
-            <th class="p-5 text-right">Acciones</th>
+            <th class="p-5"><center>Acciones</center></th>
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-100">
@@ -35,17 +34,25 @@
                 {{ p.stock }}
               </span>
             </td>
-            <td class="p-5 text-right space-x-2">
-              <button @click="openSpecs(p)" class="p-2.5 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-all" title="Especificaciones Técnicas">
-                ⚙️
-              </button>
-              <a :href="`/productos/actualizar/${p.id_producto}`" class="inline-block p-2.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all">
-                ✏️
-              </a>
-              <button @click="confirmDelete(p.id_producto)" class="p-2.5 bg-red-50 text-red-400 rounded-lg hover:bg-red-500 hover:text-white transition-all">
-                🗑️
-              </button>
-            </td>
+           <td class="p-5 text-right space-x-2">
+            <center>
+ <a 
+  :href="`/productos/especificaciones/${p.id_producto}`" 
+  class="btn-icono bg-slate-100 text-slate-600 hover:bg-slate-200" 
+  title="Especificaciones"
+>
+  ⚙️
+</a>
+
+  <a :href="`/productos/actualizar/${p.id_producto}`" class="btn-icono bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white">
+    ✏️
+  </a>
+
+  <button @click="confirmDelete(p.id_producto)" class="btn-icono bg-red-50 text-red-400 hover:bg-red-500 hover:text-white">
+    🗑️
+  </button>
+  </center>
+</td>
           </tr>
         </tbody>
       </table>
@@ -55,14 +62,6 @@
     <div v-if="showSpecs" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div class="bg-white rounded-3xl w-full max-w-4xl max-h-[92vh] shadow-2xl overflow-hidden flex flex-col">
 
-        <!-- Header -->
-        <div class="p-6 bg-slate-800 text-white flex justify-between items-center shrink-0">
-          <div>
-            <h3 class="font-black uppercase text-sm tracking-widest">Ficha Técnica</h3>
-            <p class="text-lg font-semibold">{{ activeProduct?.nombre }}</p>
-          </div>
-          <button @click="closeSpecs" class="text-3xl leading-none hover:text-red-400 transition-colors">&times;</button>
-        </div>
 
         <!-- Body con scroll -->
         <div class="flex-1 p-6 space-y-8 overflow-y-auto">
@@ -147,6 +146,7 @@
       </div>
     </div>
   </div>
+  
 </template>
 
 <script setup>

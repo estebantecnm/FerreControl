@@ -65,8 +65,8 @@ const guardarCliente = async () => {
             {{ mensaje.texto }}
         </div>
 
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h2 class="text-xs font-black text-blue-600 uppercase mb-4 tracking-widest">1. Información Obligatoria</h2>
+        <div class="bg-white p-6 rounded-xl shadow-sm ">
+            <h2 class="text-xs font-black text-blue-600 uppercase mb-4 tracking-widest" style="color: #d97706;">1. Información Obligatoria</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                     <label class="block text-[10px] font-bold text-slate-400 uppercase">Nombre *</label>
@@ -101,8 +101,8 @@ const guardarCliente = async () => {
             </div>
         </div>
 
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h2 class="text-xs font-black text-blue-600 uppercase mb-4 tracking-widest">2. Contacto y Domicilio</h2>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+            <h2 class="text-xs font-black text-blue-600 uppercase mb-4 tracking-widest" style="color: #d97706;">2. Contacto y Domicilio</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label class="block text-[10px] font-bold text-slate-400 uppercase">Correo *</label>
@@ -118,24 +118,26 @@ const guardarCliente = async () => {
                     <label class="block text-[10px] font-bold text-slate-400 uppercase">Calle *</label>
                     <input v-model="cliente.calle" type="text" class="w-full border-slate-200 rounded-lg text-sm" required>
                 </div>
-                <div class="flex gap-2">
-                    <div class="w-1/2">
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase">Ext</label>
-                        <input v-model.number="cliente.num_ext" type="number" class="w-full border-slate-200 rounded-lg text-sm">
-                    </div>
-                    <div class="w-1/2">
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase">Int</label>
-                        <input v-model.number="cliente.num_int" type="number" class="w-full border-slate-200 rounded-lg text-sm">
-                    </div>
-                </div>
+               <div class="flex gap-2">
+  <div class="flex-1">
+    <label class="block text-[10px] font-bold text-slate-400 uppercase">Ext</label>
+    <input v-model.number="cliente.num_ext" type="number"
+           class="w-full box-border border-slate-200 rounded-lg text-sm">
+  </div>
+  <div class="flex-1">
+    <label class="block text-[10px] font-bold text-slate-400 uppercase">Int</label>
+    <input v-model.number="cliente.num_int" type="number"
+           class="w-full box-border border-slate-200 rounded-lg text-sm">
+  </div>
+</div>
                 <input v-model="cliente.colonia" type="text" placeholder="Colonia *" class="w-full border-slate-200 rounded-lg text-sm" required>
                 <input v-model="cliente.municipio" type="text" placeholder="Municipio *" class="w-full border-slate-200 rounded-lg text-sm" required>
                 <input v-model="cliente.estado" type="text" placeholder="Estado *" class="w-full border-slate-200 rounded-lg text-sm" required>
             </div>
         </div>
 
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h2 class="text-xs font-black text-blue-600 uppercase mb-4 tracking-widest">3. Configuración de Crédito</h2>
+        <div class="bg-white p-6 rounded-xl shadow-sm ">
+            <h2 class="text-xs font-black text-blue-600 uppercase mb-4 tracking-widest" style="color: #d97706;">3. Configuración de Crédito</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
                     <label class="block text-[10px] font-bold text-slate-400 uppercase">Tipo *</label>
@@ -163,7 +165,18 @@ const guardarCliente = async () => {
         </div>
 
         <div class="flex justify-end gap-4">
-            <button type="submit" :disabled="cargando" class="bg-slate-900 text-white px-12 py-3 rounded-xl font-bold hover:bg-blue-600 transition-all disabled:opacity-50 shadow-lg">
+            <button type="submit" :disabled="cargando" class="bg-slate-900 text-white px-12 py-3 rounded-xl font-bold hover:bg-blue-600 transition-all disabled:opacity-50 shadow-lg"
+            style="
+        background-color: #f59e0b;
+        color: rgb(0, 0, 0);
+        padding: 5px 15px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        transition: all 0.25s ease;
+    ">
                 {{ cargando ? 'Procesando...' : 'Guardar Cliente' }}
             </button>
         </div>

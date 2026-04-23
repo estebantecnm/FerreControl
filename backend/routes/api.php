@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
+
     // APIs de cada modelo
     //CRUDs
 
@@ -69,6 +70,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/especificaciones/{id}', [EspecificacionController::class, 'show']);//funciona
     Route::put('/especificaciones/{id}', [EspecificacionController::class, 'update']);//funciona
     Route::delete('/especificaciones/{id}', [EspecificacionController::class, 'destroy']);
+
+    
 
     // API de usuario
     Route::get('/usuarios', [UsuarioController::class, 'index']);//funciona

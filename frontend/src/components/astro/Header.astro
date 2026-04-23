@@ -1,31 +1,42 @@
 ---
 // src/components/astro/Header.astro
 ---
-
-<nav class="p-4 bg-white border-b mb-6 shadow-sm">
-    <div class="container mx-auto flex items-center justify-between">
-        <div class="flex flex-wrap gap-4 items-center">
-            <a href="/dashboard" class="font-bold text-blue-800">FerreControl</a>
-                        <a href="/ventas/pos" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Punto de Venta</a>
-            <a href="/inventario/lista" class="hover:text-blue-600 transition">Inventario</a>
-
+<nav class="p-5 bg-white border-b mb-6 shadow-sm pt-4 pb-6">
+    <div class="container mx-auto flex items-center justify-between ">
+        
+        <div class="flex items-center">
+            <a href="/dashboard" class="font-bold text-blue-800" style="margin-right: 30px;">FerreControl</a>
+            
+            <a href="/ventas/pos" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition" style="margin-right: 20px;">Punto de Venta</a>
+            
+            <a href="/inventario/lista" class="hover:text-blue-600 transition" style="margin-right: 20px;">Inventario</a>
             <div id="adminMenu" class="hidden flex items-center gap-4">
                 <div class="h-4 w-px bg-gray-300"></div> 
-                <a href="/productos/listaProductos" class="hover:text-blue-600 transition">Productos</a>
-                <a href="/clientes/listaClientes" class="hover:text-blue-600 transition">Clientes</a>
-                <a href="/productos/registrarCategoria" class="hover:text-blue-600 transition">Categorias</a>
+                <a href="/productos/listaProductos" class="hover:text-blue-600 transition" style="margin-right: 30px;">Productos</a>
+                <a href="/clientes/listaClientes" class="hover:text-blue-600 transition" style="margin-right: 30px;">Clientes</a>
+                <a href="/productos/registrarCategoria" class="hover:text-blue-600 transition" style="margin-right: 30px;">Categorias</a>
             </div>
         </div>
-
-        <div class="flex items-center gap-4">
-            <span id="userName" class="text-sm text-gray-600 italic"></span>
-            <button id="logoutBtn" class="text-red-600 border border-red-600 hover:bg-red-50 px-4 py-1 rounded transition">
-                Salir
-            </button>
+        <div class="flex items-center">
+            <span id="userName" class="text-sm text-gray-600 italic" style=" margin-right: 20px; border: none; border-radius: 5px;  cursor: pointer; width: 100%; font-size: 16px;  transition: background-color 0.3s ease;"></span>
+           <button id="logoutBtn"
+    style="
+        background-color: #f59e0b;
+        color: rgb(0, 0, 0);
+        padding: 5px 15px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        transition: all 0.25s ease;
+    "
+>
+    Salir
+</button>
         </div>
     </div>
 </nav>
-
 <script>
     function inicializarHeader() {
         const userJson = localStorage.getItem('user');

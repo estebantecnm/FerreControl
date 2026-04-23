@@ -8,6 +8,8 @@ interface Props {
 }
 
 const { title } = Astro.props;
+// Detectamos si estamos en la página de venta-exitosa
+const isVentaExitosa = Astro.url.pathname === '/venta-exitosa';
 ---
 
 <!DOCTYPE html>
@@ -16,17 +18,30 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
     <title>{title} | FerreControl</title>
 </head>
-<body class="bg-slate-50 min-h-screen text-slate-900">
-    <Header />
+<body class="bg-ferre-bg min-h-screen text-ferre-text font-sans selection:bg-ferre-accent selection:text-ferre-bg">
+    
+    {!isVentaExitosa && <Header />}
 
-    <main class="container mx-auto px-4 pb-12">
+    <main class="container mx-auto px-6 pb-16">
         <slot /> 
     </main>
 
-    <footer class="py-6 text-center text-slate-400 text-xs">
-        &copy; {new Date().getFullYear()} FerreControl - Sistema de Gestión Interna
-    </footer>
+    {!isVentaExitosa && (
+        <footer class="py-10 text-center border-t border-ferre-border">
+            <p class="text-ferre-muted text-[10px] uppercase tracking-[3px] font-mono">
+                &copy; {new Date().getFullYear()} FerreControl — Sistema de Gestión Interna
+            </p>
+        </footer>
+    )}
+
+    <style is:global>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0c0f14; }
+        ::-webkit-scrollbar-thumb { background: #1e2736; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+    </style>
 </body>
 </html>

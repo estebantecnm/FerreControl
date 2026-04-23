@@ -1,38 +1,9 @@
 ---
-import '../styles/global.css';
+// src/pages/dashboard.astro
+import MainLayout from '../layouts/MainLayout.astro';
 import ReportsDashboard from '../components/vue/ReportsDashboard.vue';
-import Header from '../components/astro/Header.astro';
 ---
 
-<Header />
-<main class="p-6">
-    <h1>Bienvenido al Sistema</h1>
-</main> 
-
-<div class="bg-slate-50 min-h-screen p-8">
-  <ReportsDashboard client:load />
-</div>
-
-<script type="module">
-  async function logout() {
-    const token = localStorage.getItem('token');
-    try {
-      if (token) {
-        await fetch('http://127.0.0.1:8000/api/logout', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-          }
-        });
-      }
-    } catch (e) {
-      console.error('Error al cerrar sesión:', e);
-    } finally {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/';
-    }
-  }
-  window.logout = logout;
-</script>
+<MainLayout title="Dashboard">
+    <ReportsDashboard client:load />
+</MainLayout>

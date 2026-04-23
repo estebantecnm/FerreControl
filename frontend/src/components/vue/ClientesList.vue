@@ -49,8 +49,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="mt-8 bg-white rounded-xl shadow-sm overflow-hidden border border-slate-200">
-        <div class="p-8 bg-slate-50/50 border-b border-slate-100 flex justify-between items-center">
+<div class="mt-8 bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="p-8 bg-slate-50/50   flex justify-between items-center">
             <div>
                 <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">Directorio de Clientes</h2>
                 <p class="text-slate-500 mt-1">Administración de contactos y facturación</p>
@@ -98,7 +98,7 @@ onMounted(() => {
                         <td v-if="isAdmin" class="px-6 py-4">
                             <div class="flex justify-center gap-2">
                                 <a :href="`/clientes/actualizar/${c.id_cliente}`" 
-                                   class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Editar">
+                                   class="p-2 text-blue-300 hover:bg-blue-50 rounded-lg transition" title="Editar">
                                    Actualizar 
                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 55 55" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                                 </a>

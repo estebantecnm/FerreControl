@@ -8,6 +8,8 @@
   --card: #ffffff;
   --muted: #6b7280;
   --text: #111827;
+  --accent-nav: #d97706;
+  --accent-sub: #ecb486;
   --accent: #0f172a;
   --border: #e5e7eb;
   --radius: 8px;
@@ -41,7 +43,7 @@ nav {
   border-bottom: 1px solid var(--border);
 }
 nav a {
-  color: var(--text);
+  color: var(--accent-nav);
   text-decoration: none;
   padding: 0.5rem 0.75rem;
   display: inline-block;
@@ -97,7 +99,7 @@ th, td {
   text-align: left;
 }
 th {
-  color: var(--muted);
+  color: var(--accent-nav);
   font-size: 0.875rem;
   font-weight: 600;
 }
@@ -112,3 +114,16 @@ th {
   .container { padding-left: 0.75rem; padding-right: 0.75rem; }
   nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 }
+
+/* Esto asegura que todos los botones tengan el mismo tamaño y centrado */
+.btn-icono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;      /* Tamaño fijo para que sean cuadrados */
+    height: 40px;     /* Tamaño fijo para que sean cuadrados */
+    border-radius: 8px; /* Ajusta según lo que te guste */
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+

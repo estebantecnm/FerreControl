@@ -1,11 +1,17 @@
 <template>
   <div class="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div class="flex justify-end p-2">
+  <a href="/productos/listaProductos" class="text-3xl hover:text-red-400 transition-colors">
+    &times;
+  </a>
+</div>
     <h1 class="text-3xl font-bold mb-2">Actualizar Producto</h1>
+    
     <p class="text-slate-600 mb-8">Ingrese la información técnica y comercial del nuevo artículo</p>
 
     <form @submit.prevent="submit" class="space-y-12">
       <section>
-        <h2 class="text-xl font-bold uppercase tracking-wide mb-6">DATOS GENERALES</h2>
+        <h2 class="text-xl font-bold uppercase tracking-wide mb-6" style="color: #d97706;">DATOS GENERALES</h2>
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-bold mb-1">Nombre</label>
@@ -32,7 +38,7 @@
       </section>
 
       <section>
-        <h2 class="text-xl font-bold uppercase tracking-wide mb-6">COSTOS E INVENTARIO</h2>
+        <h2 class="text-xl font-bold uppercase tracking-wide mb-6" style="color: #d97706;">COSTOS E INVENTARIO</h2>
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-bold text-slate-500 uppercase mb-1">PRECIO COMPRA</label>
@@ -76,7 +82,18 @@
       <p v-if="error" class="text-red-500 font-bold text-center">{{ error }}</p>
 
       <div class="pt-8">
-        <button type="submit" class="w-full bg-slate-900 text-white p-4 rounded font-bold text-lg uppercase tracking-wider hover:bg-slate-800 disabled:bg-slate-500" :disabled="loading">
+        <button type="submit" class="w-full bg-slate-900 text-white p-4 rounded font-bold text-lg uppercase tracking-wider hover:bg-slate-800 disabled:bg-slate-500" style="
+        background-color: #f59e0b;
+        color: rgb(0, 0, 0);
+        padding: 5px 15px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        transition: all 0.25s ease;
+    "
+    :disabled="loading">
           {{ loading ? 'Actualizando...' : 'Actualizar Producto' }}
         </button>
       </div>

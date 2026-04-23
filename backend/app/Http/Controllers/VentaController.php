@@ -104,6 +104,7 @@ class VentaController extends Controller
                 'venta' => $venta->load('detalles')
             ], 201);
         });
+        
     }
 
     public function show($id)

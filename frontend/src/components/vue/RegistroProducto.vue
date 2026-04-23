@@ -1,4 +1,10 @@
 <template>
+  <div class="flex justify-end">
+  <a href="/productos/listaProductos" 
+     class="text-3xl hover:text-red-400 transition-colors">
+    &times;
+  </a>
+</div>
   <div class="max-w-4xl mx-auto p-4 md:p-8">
     <div class="card !p-0 shadow-sm overflow-hidden">
       
@@ -10,7 +16,7 @@
       <form @submit.prevent="submit" class="p-6 md:p-8 space-y-8">
         
         <section>
-          <h3 class="text-xs font-black uppercase tracking-wider text-blue-600 mb-4">Datos Generales</h3>
+          <h3 class="text-xs font-black uppercase tracking-wider text-blue-600 mb-4" style="color: #d97706;">Datos Generales</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-sm font-bold mb-1">Nombre</label>
@@ -37,7 +43,7 @@
         </section>
 
         <section>
-          <h3 class="text-xs font-black uppercase tracking-wider text-emerald-600 mb-4">Costos e Inventario</h3>
+          <h3 class="text-xs font-black uppercase tracking-wider text-emerald-600 mb-4" style="color: #d97706;">Costos e Inventario</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-slate-50 p-4 rounded-lg border border-dashed" style="border-color: var(--border)">
             <div>
               <label class="block text-xs font-bold text-muted uppercase mb-1">Precio Compra</label>
@@ -89,7 +95,19 @@
             <div v-if="success" class="text-green-600 text-sm font-bold bg-green-50 p-2 rounded border border-green-100">{{ success }}</div>
           </div>
           <div class="flex gap-4 w-full md:w-auto">
-            <button type="submit" class="btn btn-primary px-10 py-2.5 font-bold shadow-sm w-full md:w-auto" :disabled="loading">
+            <button type="submit" class="btn btn-primary px-10 py-2.5 font-bold shadow-sm w-full md:w-auto" 
+            style="
+        background-color: #f59e0b;
+        color: rgb(0, 0, 0);
+        padding: 5px 15px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        transition: all 0.25s ease;
+    "
+            :disabled="loading">
               {{ loading ? 'Guardando...' : 'Registrar Producto' }}
             </button>
           </div>

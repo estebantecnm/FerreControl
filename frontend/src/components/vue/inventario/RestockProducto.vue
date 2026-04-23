@@ -1,9 +1,14 @@
 <template>
-  <div class="max-w-2xl mx-auto p-8 bg-white shadow-xl rounded-2xl border border-slate-100">
+  <div class="flex justify-end">
+  <a href="/inventario/lista" 
+     class="text-3xl hover:text-red-400 transition-colors">
+    &times;
+  </a>
+</div>
+  <div class="max-w-2xl mx-auto p-8 bg-white shadow-xl rounded-2xl ">
     <div class="flex items-center gap-4 mb-6">
-      <div class="bg-emerald-100 text-emerald-600 p-3 rounded-lg text-2xl">📦</div>
       <div>
-        <h1 class="text-2xl font-black text-slate-800 uppercase tracking-tight">Entrada de Stock</h1>
+        <h1 class="text-2xl font-black text-slate-800 uppercase tracking-tight">Entrada de Stock 📦</h1>
         <p class="text-slate-500 text-sm">Aumentar existencias en inventario</p>
       </div>
     </div>
@@ -14,7 +19,7 @@
     </div>
 
     <div v-else-if="product">
-      <div class="mb-8 p-4 bg-slate-50 rounded-xl border border-slate-100">
+      <div class="mb-8 p-4 bg-slate-50 rounded-xl">
         <h2 class="text-lg font-bold text-slate-700">{{ product.nombre }}</h2>
         <div class="flex justify-between mt-2">
           <span class="text-slate-500 text-sm">Stock Actual:</span>
@@ -24,7 +29,7 @@
 
       <form @submit.prevent="submitRestock" class="space-y-6">
         <div>
-          <label class="block text-xs font-black text-slate-400 uppercase mb-2 tracking-widest">Cantidad a añadir</label>
+          <label class="block text-xs font-black text-slate-400 uppercase mb-2 tracking-widest" style="color: #d97706;"><b>Cantidad a añadir</b></label>
           <input 
             v-model.number="amountToAdd" 
             type="number" 
@@ -35,21 +40,33 @@
           />
         </div>
 
-        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 flex justify-between items-center">
-          <span class="text-emerald-700 font-medium">Stock Final tras operación:</span>
-          <span class="text-2xl font-black text-emerald-600 font-mono">
+        <div class="bg-emerald-50 p-4 rounded-xl flex justify-between items-center">
+          <span class="text-emerald-700 font-medium uppercase" style="color: green;"><b>Stock Final tras operación:</b></span>
+          <span class="text-2xl font-black text-emerald-600 font-mono" style="color: green;"><b>
             {{ product.stock + (amountToAdd || 0) }}
+            </b>
           </span>
         </div>
 
         <div class="pt-4 flex gap-3">
-          <a href="/inventario/lista" class="w-1/3 text-center py-4 text-slate-400 font-bold hover:text-slate-600 transition-colors">
+          <a href="/inventario/lista" class="w-1/3 text-center py-4 text-slate-400 font-bold hover:text-slate-600 transition-colors" style="color: red;">
             CANCELAR
           </a>
           <button 
             type="submit" 
             :disabled="processing || amountToAdd <= 0"
             class="w-2/3 bg-slate-900 text-white p-4 rounded-xl font-black text-lg uppercase shadow-lg hover:bg-black disabled:bg-slate-300 transition-all"
+            style="
+        background-color: #f59e0b;
+        color: rgb(0, 0, 0);
+        padding: 5px 15px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        transition: all 0.25s ease;
+    "
           >
             {{ processing ? 'PROCESANDO...' : 'CONFIRMAR ENTRADA' }}
           </button>

@@ -1,0 +1,12 @@
+---
+// src/pages/productos/especificaciones/[id].astro
+export const prerender = false;
+import FichaTecnica from '../../../components/vue/FichaTecnica.vue'; // Crea este componente Vue
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+const { id } = Astro.params;
+---
+
+<MainLayout title="Ficha Técnica">
+    <FichaTecnica idProducto={id} client:only="vue" />
+</MainLayout>

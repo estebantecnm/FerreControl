@@ -1,0 +1,12 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import ActualizarCategorias from '../../components/vue/ActualizarCategorias.vue';
+---
+
+<MainLayout title="Registrar Categoría">
+    <div class="max-w-6xl mx-auto p-8">
+        <h1 class="text-3xl font-bold text-slate-800 mb-8">Administración de Categorías</h1>
+        
+        <ActualizarCategorias client:load />
+    </div>
+</MainLayout>

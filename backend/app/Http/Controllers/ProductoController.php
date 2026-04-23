@@ -136,4 +136,6 @@ class ProductoController extends Controller
 
         return response()->json(['message' => 'Producto eliminado correctamente']);
     }
+
+    
 }

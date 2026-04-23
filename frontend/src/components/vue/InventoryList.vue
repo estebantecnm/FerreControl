@@ -1,6 +1,6 @@
 <template>
-  <div class="mt-8 bg-white rounded-xl shadow-sm overflow-hidden border border-slate-200">
-    <div class="p-8 bg-slate-50/30 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="mt-8 bg-white rounded-xl shadow-sm overflow-hidden">
+   <div class="p-8 bg-slate-50/30 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
       <div>
         <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">Inventario de Productos</h2>
         <p class="text-slate-500 mt-1">
@@ -10,8 +10,8 @@
       
       <div class="flex items-center gap-3">
 
-        <span class="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-1 rounded">
-          {{ filteredProducts.length }} Productos
+        <span class="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-1 rounded" style="color: var(--text)">
+         <b> {{ filteredProducts.length }} Productos </b>
         </span>
       </div>
     </div>
@@ -21,7 +21,7 @@
 
         <input
           v-model="search"
-          placeholder="Buscar por nombre, marca o código de barras..."
+          placeholder=" 🔍 Buscar por nombre, marca o código de barras..."
           class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
           @input="currentPage = 1"
         />
@@ -82,8 +82,8 @@
         </tbody>
       </table>
 
-      <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="text-xs text-slate-500">
+<div class="p-4 bg-slate-50 flex flex-col md:flex-row justify-between items-center gap-4">        
+  <div class="text-xs text-slate-500">
           Mostrando {{ paginatedProducts.length }} de {{ filteredProducts.length }} productos
         </div>
         

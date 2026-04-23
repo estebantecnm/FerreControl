@@ -1,17 +1,24 @@
 <template>
-  <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-slate-200">
+  <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+    
     <div class="p-8 bg-slate-900 text-white">
+       <div class="flex justify-end p-2">
+  <a href="/clientes/listaClientes" class="text-3xl hover:text-red-400 transition-colors">
+    &times;
+  </a>
+</div>
       <h1 class="text-3xl font-extrabold tracking-tight">Actualizar Cliente</h1>
-      <p class="text-slate-400 mt-2 text-sm uppercase tracking-widest font-semibold">Edición de ficha de cliente #{{ idCliente }}</p>
+      <p class="text-slate-400 mt-2 text-sm uppercase tracking-widest font-semibold" style="color: var(--text)"><b>Edición de ficha de cliente #{{ idCliente }}</b></p>
     </div>
+  
 
     <form @submit.prevent="submit" class="p-8 space-y-10">
       
       <section>
-        <div class="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
+        <div class="flex items-center gap-2 mb-6 pb-2">
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <h2 class="text-sm font-black text-slate-800 uppercase tracking-wider">Información Personal</h2>
+            <h2 class="text-sm font-black text-slate-800 uppercase tracking-wider"  style="color: #d97706;">Información Personal</h2>
           <div class="space-y-1">
             <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Nombre</label>
             <input v-model="form.nombre" type="text" class="w-full border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 transition-all" required />
@@ -46,7 +53,7 @@
         <div class="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <h2 class="text-sm font-black text-slate-800 uppercase tracking-wider">Ubicación y Contacto</h2>
+            <h2 class="text-sm font-black text-slate-800 uppercase tracking-wider"  style="color: #d97706;">Ubicación y Contacto</h2>
           <div class="space-y-1">
             <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Correo Electrónico</label>
             <input v-model="form.correo" type="email" class="w-full border-slate-200 rounded-xl text-sm" required />
@@ -78,11 +85,11 @@
       </section>
 
       <section>
-        <div class="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
+        <div class="flex items-center gap-2 mb-6 pb-2">
          
         </div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <h2 class="text-sm font-black text-slate-800 uppercase tracking-wider">Crédito y Perfil</h2>
+            <h2 class="text-sm font-black text-slate-800 uppercase tracking-wider"  style="color: #d97706;">Crédito y Perfil</h2>
           <div class="space-y-1">
             <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Tipo de Cliente</label>
             <select v-model="form.tipo_cliente" class="w-full border-slate-200 rounded-xl text-sm" required>
@@ -100,7 +107,7 @@
           </div>
           <div class="space-y-1">
             <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Status</label>
-            <select v-model="form.status" class="w-full border-slate-200 rounded-xl text-sm" required>
+            <select v-model="form.status" class="w-full border-slate-200 rounded-xl text-sm"  required>
               <option value="Activo">Activo</option>
               <option value="Inactivo">Inactivo</option>
             </select>
@@ -116,10 +123,32 @@
       </div>
 
       <div class="flex gap-4 pt-6">
-        <button type="button" @click="window.history.back()" class="flex-1 bg-slate-100 text-slate-600 p-4 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-200 transition-all">
+        <button type="button" @click="window.history.back()" class="flex-1 bg-slate-100 text-slate-600 p-4 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-200 transition-all"
+        style="
+        background-color: #f59e0b;
+        color: rgb(0, 0, 0);
+        padding: 5px 15px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        transition: all 0.25s ease;
+    ">
           Cancelar
         </button>
-        <button type="submit" class="flex-[2] bg-slate-900 text-white p-4 rounded-xl font-bold text-lg uppercase tracking-wider hover:bg-blue-600 shadow-lg disabled:bg-slate-400 transition-all" :disabled="loading">
+        <button type="submit" class="flex-[2] bg-slate-900 text-white p-4 rounded-xl font-bold text-lg uppercase tracking-wider hover:bg-blue-600 shadow-lg disabled:bg-slate-400 transition-all"
+        style="
+        background-color: #f59e0b;
+        color: rgb(0, 0, 0);
+        padding: 5px 15px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        transition: all 0.25s ease;
+    " :disabled="loading">
           {{ loading ? 'Actualizando...' : 'Guardar Cambios' }}
         </button>
       </div>

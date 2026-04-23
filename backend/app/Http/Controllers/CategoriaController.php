@@ -11,10 +11,12 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        $categorias = Categoria::all();
+        // Carga las categorías junto con sus productos vinculados
+        $categorias = Categoria::with('productos')->get(); 
 
+        // Si está vacío, devuelve un 200 con array vacío o un mensaje
         if ($categorias->isEmpty()) {
-            return response()->json(['message' => 'No se encontraron categorías'], 404);
+            return response()->json([], 200); // Es mejor devolver [] que un 404 si no hay datos
         }
 
         return response()->json($categorias);
