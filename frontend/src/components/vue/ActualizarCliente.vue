@@ -78,9 +78,18 @@
               <input v-model.number="form.num_int" type="number" class="w-full border-slate-200 rounded-xl text-sm" />
             </div>
           </div>
-          <input v-model="form.colonia" type="text" placeholder="Colonia" class="w-full border-slate-200 rounded-xl text-sm" required />
-          <input v-model="form.municipio" type="text" placeholder="Municipio" class="w-full border-slate-200 rounded-xl text-sm" required />
-          <input v-model="form.estado" type="text" placeholder="Estado" class="w-full border-slate-200 rounded-xl text-sm" required />
+            <div class="space-y-1">
+              <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Colonia</label>
+              <input v-model="form.colonia" type="text" placeholder="Colonia" class="w-full border-slate-200 rounded-xl text-sm" required />
+            </div>
+            <div class="space-y-1">
+              <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Municipio</label>
+              <input v-model="form.municipio" type="text" placeholder="Municipio" class="w-full border-slate-200 rounded-xl text-sm" required />
+            </div>
+            <div class="space-y-1">
+              <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Estado</label>
+              <input v-model="form.estado" type="text" placeholder="Estado" class="w-full border-slate-200 rounded-xl text-sm" required />
+            </div>
         </div>
       </section>
 
